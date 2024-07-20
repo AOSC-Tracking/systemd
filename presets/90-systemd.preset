@@ -24,8 +24,8 @@ enable systemd-homed-activate.service
 enable systemd-journald-audit.socket
 enable systemd-mountfsd.socket
 enable systemd-network-generator.service
-enable systemd-networkd.service
-enable systemd-networkd-wait-online.service
+disable systemd-networkd.service
+disable systemd-networkd-wait-online.service
 enable systemd-nsresourced.socket
 enable systemd-pstore.service
 enable systemd-resolved.service
