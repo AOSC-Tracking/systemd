@@ -453,7 +453,7 @@ bool shall_tint_background(void) {
 
         cache = getenv_bool("SYSTEMD_TINT_BACKGROUND");
         if (cache == -ENXIO)
-                return (cache = true);
+                return (cache = false);
         if (cache < 0)
                 log_debug_errno(cache, "Failed to parse $SYSTEMD_TINT_BACKGROUND, leaving background tinting enabled: %m");
 
