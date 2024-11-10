@@ -522,10 +522,10 @@ int mount_cgroup_legacy_controllers(bool loaded_policy) {
                 else if (cg_is_legacy_enabled()) {
                         log_full(LOG_CRIT,
                                  "Legacy cgroup v1 configured. This will stop being supported soon.\n"
-                                 "Will proceed with cgroup v2 after 30 s.\n"
+                                 "Will proceed with cgroup v2\n"
                                  "Set systemd.unified_cgroup_hierarchy=1 to switch to cgroup v2 "
                                  "or set SYSTEMD_CGROUP_ENABLE_LEGACY_FORCE=1 to reenable v1 temporarily.");
-                        (void) usleep_safe(30 * USEC_PER_SEC);
+                        (void) usleep_safe(0 * USEC_PER_SEC);
 
                         return 0;
                 }
