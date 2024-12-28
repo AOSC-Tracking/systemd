@@ -976,6 +976,13 @@ int exec_setup_credentials(
                 return r;
 
         r = safe_fork("(sd-mkdcreds)", FORK_DEATHSIG_SIGTERM|FORK_WAIT|FORK_NEW_MOUNTNS, NULL);
+        if (r == -EINVAL) {
+                /* Well, try again without CLONE_NEWNS.
+                 * There's a chance that we might be running with QEMU user emulation.
+                 * QEMU user emulation does not support CLONE_NEWNS:
+                 * https://gitlab.com/qemu-project/qemu/-/issues/1962 */
+                r = safe_fork("(sd-mkdcreds)", FORK_DEATHSIG_SIGTERM|FORK_WAIT, NULL);
+        }
         if (r < 0) {
                 _cleanup_(rmdir_and_freep) char *u = NULL; /* remove the temporary workspace if we can */
                 _cleanup_free_ char *t = NULL;
